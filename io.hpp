@@ -21,7 +21,7 @@
 
 namespace clix {
 
-struct io {
+struct in {
 private:
   const char *data{nullptr};
   std::size_t size{0}, pos = {0};
@@ -73,15 +73,15 @@ private:
   }
 
 public:
-  io() { init(); }
+  in() { init(); }
 
-  ~io() {
+  ~in() {
     if (owns_mmap && data)
       munmap(const_cast<char *>(data), size);
   }
 
-  io(const io &) = delete;
-  io &operator=(const io &) = delete;
+  in(const in &) = delete;
+  in &operator=(const in &) = delete;
 
   // io.read(&var);
   template <typename T> bool read(T *out) {
@@ -175,4 +175,4 @@ public:
 
 } // namespace clix
 
-inline clix::io io;
+inline clix::in in;
