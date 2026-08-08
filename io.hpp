@@ -4,6 +4,8 @@
 
 #pragma once
 
+#include "svec.hpp"
+
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -135,6 +137,17 @@ public:
     if (n > ArrSize) [[unlikely]]
       throw std::runtime_error("clix::io::read: n (" + std::to_string(n) +
                                ") exceeds array capacity (" +
+                               std::to_string(ArrSize) + ")");
+
+    for (std::size_t i = 0; i < n; ++i)
+      read(&arr[i]);
+  }
+
+  template <typename T, std::size_t ArrSize>
+  void read(clix::svec<T, ArrSize> &arr, std::size_t n) {
+    if (n > ArrSize) [[unlikely]]
+      throw std::runtime_error("clix::io::read: n (" + std::to_string(n) +
+                               ") exceeds clix::svec capacity (" +
                                std::to_string(ArrSize) + ")");
 
     for (std::size_t i = 0; i < n; ++i)
