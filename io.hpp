@@ -173,6 +173,56 @@ public:
   }
 };
 
+struct out {
+private:
+  std::vector<char> buf;
+
+public:
+  out() { buf.reserve(1 << 20); }
+
+  ~out() { flush(); }
+
+  out(const out &) = delete;
+  out &operator=(const out &) = delete;
+
+  void flush() {
+    if (!buf.empty()) {
+      ::write(STDOUT_FILENO, buf.data(), buf.size());
+      buf.clear();
+    }
+  }
+
+  template <typename T> void write(const T &v) {
+    if constexpr (std::is_same_v<T, char>) {
+      buf.push_back(v);
+    }
+
+    else if constexpr (std::is_same_v<T, std::string_view> ||
+                       std::is_same_v<T, std::string>) {
+      buf.insert(buf.end(), v.begin(), v.end());
+    }
+
+    else if constexpr (std::is_integral_v<T> || std::is_floating_point_v<T>) {
+      char tmp[32];
+      auto res = std::to_chars(tmp, tmp + sizeof(tmp), v);
+      buf.insert(buf.end(), tmp, res.ptr);
+    }
+
+    else {
+      static_assert(!sizeof(T), "clix::out::write: unsupported type");
+    }
+  }
+
+  template <typename T> void writeln(const T &v) {
+    write(v);
+    buf.push_back('\n');
+  }
+
+  void space() { buf.push_back(' '); }
+  void newline() { buf.push_back('\n'); }
+};
+
 } // namespace clix
 
 inline clix::in in;
+inline clix::out out;
