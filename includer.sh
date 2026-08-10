@@ -31,9 +31,9 @@ awk '
             match(line, /"[^"]+"/, match_arr);
             inc_file = substr(match_arr[0], 2, length(match_arr[0]) - 2);
             inc_file = current_dir inc_file;
-            print "// --- Inline Start: " inc_file " ---"
+            print "// Start: " inc_file " ---"
             process_file(inc_file);
-            print "// --- Inline End: " inc_file " ---"
+            print "// End: " inc_file " ---"
         } else {
             print line;
         }

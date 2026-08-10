@@ -1,0 +1,35 @@
+/*
+ * https://atcoder.jp/contests/abc467/tasks/abc445_c
+ */
+
+#include "io.hpp"
+#include "svec.hpp"
+#include "types.hpp"
+
+#pragma GCC optimize("O2,unroll-loops")
+#pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
+
+int main() {
+  constexpr u64 LIMIT = 500000;
+
+  auto n = in.read<u64>();
+  clix::svec<u32, LIMIT> as;
+  clix::svec<u32, LIMIT> res;
+
+  in.read(as, n);
+
+  for (u32 i = n; i >= 1; i--) {
+    if (as[i - 1] == i)
+      res[i - 1] = i;
+
+    if (as[i - 1] > i)
+      res[i - 1] = res[as[i - 1] - 1];
+  }
+
+  for (u32 i = 0; i < n; i++) {
+    out.write(res[i]);
+    out.space();
+  }
+
+  return 0;
+}
