@@ -23,18 +23,25 @@ public:
     requires(sizeof...(Args) <= N)
       : data_{std::forward<Args>(args)...}, size_(sizeof...(Args)) {}
 
-  void push_back(const T &value) {
+  constexpr void push_back(const T &value) {
     if (size_ >= N) [[unlikely]]
       throw std::out_of_range("clix::svec: capacity exceeded");
 
     data_[size_++] = value;
   }
 
-  void pop_back() {
+  constexpr void pop_back() {
     if (size_ == 0) [[unlikely]]
       throw std::out_of_range("clix::svec: attempting to pop empty array");
 
     --size_;
+  }
+
+  constexpr void pop_back(std::size_t k) {
+    if (k > size_) [[unlikely]]
+      throw std::out_of_range("clix::svec: pop count exceeds size");
+
+    size_ -= k;
   }
 
   constexpr std::size_t size() const noexcept { return size_; }
@@ -100,6 +107,8 @@ public:
 
   constexpr T *data() noexcept { return data_.data(); }
   constexpr const T *data() const noexcept { return data_.data(); }
+
+  constexpr void clear() noexcept { size_ = 0; }
 };
 
 } // namespace clix

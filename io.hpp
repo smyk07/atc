@@ -156,6 +156,7 @@ public:
 
   // auto arr = io.read<u64, 2>(); ... arr[0];
   // auto [x, y, z] = io.read<u32, 5>();
+  // std::tie(a, b, c) = io.read<u32, 3>();
   template <typename T, std::size_t N> std::array<T, N> read() {
     std::array<T, N> arr;
     for (auto &x : arr)
@@ -222,7 +223,8 @@ public:
   void newline() { buf.push_back('\n'); }
 };
 
+struct io : public in, public out {};
+
 } // namespace clix
 
-inline clix::in in;
-inline clix::out out;
+inline clix::io io;

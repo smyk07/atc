@@ -34,8 +34,8 @@ auto check_and_push = [] [[gnu::always_inline]] (u64 * ab, u64 *ae,
 };
 
 i32 main() {
-  in.read(&n);
-  in.read(as, n);
+  io.read(n);
+  io.read(as, n);
 
   auto ab = as.begin(), ae = as.end();
   std::sort(ab, ae);
@@ -48,8 +48,8 @@ i32 main() {
   check_and_push(ab, ae, (*ab + *(ae - 1)));
 
   for (auto l : ls) {
-    out.write(l);
-    out.space();
+    io.write(l);
+    io.space();
   }
 
   return 0;
