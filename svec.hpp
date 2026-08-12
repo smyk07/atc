@@ -108,7 +108,7 @@ public:
   constexpr T *data() noexcept { return data_.data(); }
   constexpr const T *data() const noexcept { return data_.data(); }
 
-  constexpr void clear() noexcept { size_ = 0; }
+  constexpr void clear() noexcept { size_ = 0, data_[0] = T{}; }
 };
 
 } // namespace clix
