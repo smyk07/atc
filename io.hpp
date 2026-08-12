@@ -118,7 +118,9 @@ public:
   }
 
   // type var = io.read();
-  template <typename T> T read() {
+  template <typename T>
+  [[nodiscard]]
+  T read() {
     T v{};
     read(&v);
     return v;
@@ -157,7 +159,7 @@ public:
   // auto arr = io.read<u64, 2>(); ... arr[0];
   // auto [x, y, z] = io.read<u32, 5>();
   // std::tie(a, b, c) = io.read<u32, 3>();
-  template <typename T, std::size_t N> std::array<T, N> read() {
+  template <typename T, std::size_t N> [[nodiscard]] std::array<T, N> read() {
     std::array<T, N> arr;
     for (auto &x : arr)
       read(&x);
@@ -167,6 +169,7 @@ public:
   // auto [a, b, c] = io.read<u32, u64, f64>();
   template <typename... Ts>
     requires(sizeof...(Ts) > 1)
+  [[nodiscard]]
   std::tuple<Ts...> read() {
     std::tuple<Ts...> t;
     std::apply([this](auto &...xs) { (this->read(&xs), ...); }, t);
