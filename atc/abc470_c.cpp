@@ -23,13 +23,13 @@ std::vector<u32> acs;
 u32 qi, x, xora;
 
 int main() {
-  auto [n, q] = in.read<u64, 2>();
+  auto [n, q] = io.read<u64, 2>();
 
   while (q-- > 0) {
-    in.read(&qi);
+    io.read(&qi);
 
     if (qi == 1) {
-      in.read(&x);
+      io.read(&x);
       auto id = x - 1;
 
       if (as[id] == 0) {

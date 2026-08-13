@@ -34,7 +34,7 @@ auto check_and_push = [] [[gnu::always_inline]] (u64 * ab, u64 *ae,
 };
 
 i32 main() {
-  io.read(n);
+  io.read(&n);
   io.read(as, n);
 
   auto ab = as.begin(), ae = as.end();

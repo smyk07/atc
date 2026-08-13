@@ -14,7 +14,7 @@
 i32 main() {
   constexpr u64 LIMIT = 200000;
 
-  auto t = in.read<u32>();
+  auto t = io.read<u32>();
 
   clix::svec<u32, LIMIT> as; // bought
   clix::svec<u32, LIMIT> bs; // used
@@ -22,10 +22,10 @@ i32 main() {
   clix::svec<u32, LIMIT> q;
 
   while (t-- > 0) {
-    auto [n, d] = in.read<u32, u32>();
+    auto [n, d] = io.read<u32, u32>();
 
-    in.read(as, n);
-    in.read(bs, n);
+    io.read(as, n);
+    io.read(bs, n);
 
     auto qf = q.begin();
     auto qb = q.begin();
@@ -51,8 +51,8 @@ i32 main() {
     }
 
     u64 res = std::accumulate(qf, qb, 0);
-    out.write(res);
-    out.newline();
+    io.write(res);
+    io.newline();
   }
 
   return 0;

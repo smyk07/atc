@@ -12,7 +12,6 @@ int main(void) {
   long long n;
   std::cin >> n;
 
-  long long a;
   std::vector<long long> v(n);
 
   for (auto &x : v) {

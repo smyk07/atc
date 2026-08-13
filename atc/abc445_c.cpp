@@ -12,11 +12,11 @@
 int main() {
   constexpr u64 LIMIT = 500000;
 
-  auto n = in.read<u64>();
+  auto n = io.read<u64>();
   clix::svec<u32, LIMIT> as;
   clix::svec<u32, LIMIT> res;
 
-  in.read(as, n);
+  io.read(as, n);
 
   for (u32 i = n; i >= 1; i--) {
     if (as[i - 1] == i)
@@ -27,8 +27,8 @@ int main() {
   }
 
   for (u32 i = 0; i < n; i++) {
-    out.write(res[i]);
-    out.space();
+    io.write(res[i]);
+    io.space();
   }
 
   return 0;

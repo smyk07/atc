@@ -25,19 +25,19 @@ auto *pref = p.data();
 auto *piref = pi.data();
 
 int main() {
-  auto [n, q] = in.read<u32, 2>();
+  auto [n, q] = io.read<u32, 2>();
 
-  in.read(p, n);
+  io.read(p, n);
 
   for (u32 i = 0; i < n; i++) {
     pi[p[i] - 1] = i + 1;
   }
 
   while (q-- > 0) {
-    in.read(&qi);
+    io.read(&qi);
 
     if (qi == 1) {
-      auto [x, y] = in.read<u32, 2>();
+      auto [x, y] = io.read<u32, 2>();
       x--;
       y--;
 

@@ -13,7 +13,7 @@ i64 n;
 std::array<char, 4> s = {'g', 'a', 'y', '\0'};
 
 [[gnu::always_inline]]
-bool ask(i64 a, i64 b) {
+inline bool ask(i64 a, i64 b) {
   std::printf("? %lld %lld\n", a, b);
   std::fflush(stdout);
 
@@ -25,7 +25,7 @@ bool ask(i64 a, i64 b) {
 }
 
 [[gnu::always_inline]]
-void answer(i64 ans) {
+inline void answer(i64 ans) {
   std::printf("! %lld\n", ans);
   std::fflush(stdout);
 }
