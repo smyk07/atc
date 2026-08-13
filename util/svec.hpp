@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <algorithm>
 #include <array>
 #include <cstddef>
 #include <stdexcept>
@@ -102,7 +103,7 @@ public:
   }
 
   constexpr void reverse() noexcept(std::is_nothrow_swappable_v<T>) {
-    reverse(begin(), end());
+    std::reverse(begin(), end());
   }
 
   constexpr T *data() noexcept { return data_.data(); }
