@@ -8,6 +8,7 @@
 #include <array>
 #include <cstddef>
 #include <stdexcept>
+#include <string_view>
 
 namespace clix {
 
@@ -108,6 +109,13 @@ public:
 
   constexpr T *data() noexcept { return data_.data(); }
   constexpr const T *data() const noexcept { return data_.data(); }
+
+  constexpr std::string_view get_sv() const noexcept
+    requires std::same_as<T, char>
+  {
+    auto end_it = std::find(data(), data() + N, '\0');
+    return std::string_view{data(), static_cast<std::size_t>(end_it - data())};
+  }
 
   constexpr void clear() noexcept { size_ = 0, data_[0] = T{}; }
 };

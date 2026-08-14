@@ -191,7 +191,8 @@ public:
 
   void flush() {
     if (!buf.empty()) {
-      ::write(STDOUT_FILENO, buf.data(), buf.size());
+      std::size_t n = ::write(STDOUT_FILENO, buf.data(), buf.size());
+      (void)n;
       buf.clear();
     }
   }
