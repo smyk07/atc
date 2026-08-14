@@ -1,9 +1,12 @@
 /*
- * https://cses.fi/problemset/task/1068/
+ * https://cses.fi/problemset/task/1068
  */
 
 #include "io.hpp"
 #include "types.hpp"
+
+#pragma GCC optimize("O2,unroll-loops")
+#pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
 
 constexpr u64 LIMIT = 1'000'000;
 
